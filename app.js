@@ -12,7 +12,6 @@ const app = express();
 mongoose.connect(keys.mongoURI);
 mongoose.Promise = global.Promise;
 app.use(bodyParser.json());
-app.use(methodOverride('_method'));
 
 app.use(
   cookieSession({
