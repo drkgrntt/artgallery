@@ -3,23 +3,33 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-import  Menu from './Menu';
+import Header from './Header';
 import AddArtwork from './AddArtwork';
+import ShowArtwork from './ShowArtwork';
+import Login from './Login';
+import Admin from './Admin';
+import IndexArtwork from './IndexArtwork';
 const Landing = () => <h2>Landing</h2>
-const Index = () => <h2>Index</h2>
-const ArtWork = () => <h2>ArtWork</h2>
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchUser();
+  }
+
   render() {
     return (
       <div>
         <BrowserRouter>
-          <div className="ui container">
-            <Menu />
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/artwork" component={Index} />
-            <Route exact path="/artwork/add" component={AddArtwork} />
-            <Route exact path="/artwork/view/:id" component={ArtWork} />
+          <div>
+            <Header />
+            <div className="container">
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/admin" component={Admin} />
+              <Route exact path="/artwork" component={IndexArtwork} />
+              <Route exact path="/artwork/add" component={AddArtwork} />
+              <Route exact path="/artwork/:id" component={ShowArtwork} />
+            </div>
           </div>
         </BrowserRouter>
       </div>
@@ -27,4 +37,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, actions)(App);

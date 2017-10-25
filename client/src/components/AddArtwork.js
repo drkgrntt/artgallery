@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createArtwork } from '../actions';
 
 class AddArtwork extends Component {
   renderField(field) { 
     return (
-      <div>
-        <label className="ui label">{field.label}</label>
-        <input
-          className="ui input"
-          type="text"
-          {...field.input}
-        />
+      <div className="row">
+        <div className="input-field">
+          <input
+            placeholder={field.label}
+            type="text"
+            {...field.input}
+          />
+        </div>
       </div>
     );
   }
 
   onSubmit(values) {
-    this.props.createArtwork(values, () => {
-      this.props.history.push('/');
-    });
+    const { createArtwork, history } = this.props;
+
+    createArtwork(values, history);
   }
 
   render() {
@@ -31,7 +32,7 @@ class AddArtwork extends Component {
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           label="Artwork"
-          name="artwork"
+          name="image"
           component={this.renderField}
         />
         <Field
@@ -41,12 +42,12 @@ class AddArtwork extends Component {
         />
         <Field
           label="Class"
-          name="class"
+          name="teacher"
           component={this.renderField}
         />
         <Field
           label="Grade"
-          name="grade"
+          name="level"
           component={this.renderField}
         />
         <Field
@@ -54,8 +55,8 @@ class AddArtwork extends Component {
           name="description"
           component={this.renderField}
         />
-        <button type="submit" className="">Submit</button>
-        <Link to="/" className="">Cancel</Link>
+        <button type="submit" className="waves-light waves-effect btn">Submit</button>
+        <Link to="/" style={{ margin: '0 5px' }} className="waves-light waves-effect btn">Cancel</Link>
       </form>
     );
   }
@@ -64,5 +65,5 @@ class AddArtwork extends Component {
 export default reduxForm({
   form: 'AddArtworkForm'
 })(
-  connect(null, { createArtwork })(AddArtwork)
+  connect(null, { createArtwork })(withRouter(AddArtwork))
 );

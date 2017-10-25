@@ -4,9 +4,10 @@ const { Schema } = mongoose;
 const artSchema = new Schema({
   image: String,
   artist: String,
-  class: String,
-  grade: String,
-  description: String
+  teacher: String,
+  level: String,
+  description: String,
+  created: { type: Date, default: Date.now }
 });
 
-mongoose.model('artwork', artSchema);
+module.exports = mongoose.model('artwork', artSchema);
