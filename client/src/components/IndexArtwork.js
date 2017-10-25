@@ -10,6 +10,10 @@ class IndexArtwork extends Component {
   }
 
   renderArtworkCard() {
+    if (!this.props.artwork) {
+      return <h1>No artwork yet!</h1>
+    }
+
     return _.map(this.props.artwork, (art) => {
       return (
         <li key={art._id}>

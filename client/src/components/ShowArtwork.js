@@ -13,7 +13,7 @@ class ShowArtwork extends Component {
     const { piece } = this.props;
 
     if (!piece) {
-      return <div>Loading...</div>
+      return <h1>Loading...</h1>
     }
 
     return (
