@@ -36,7 +36,7 @@ class Header extends Component {
   render() {
     return (
       <nav>
-        <div className="nav-wrapper">
+        <div className="nav-wrapper container">
           <Link to="/artwork" className="left brand-logo">Art Gallery</Link>
           <ul className="right hide-on-med-and-down">
             {this.renderAdminContent()}

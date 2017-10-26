@@ -9,7 +9,7 @@ import ShowArtwork from './ShowArtwork';
 import Login from './Login';
 import Admin from './Admin';
 import IndexArtwork from './IndexArtwork';
-const Landing = () => <h2>Landing</h2>
+import Landing from './Landing';
 
 class App extends Component {
   componentDidMount() {
@@ -27,8 +27,8 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/artwork" component={IndexArtwork} />
+              <Route exact path="/artwork/show/:id" component={ShowArtwork} />
               <Route exact path="/artwork/add" component={AddArtwork} />
-              <Route exact path="/artwork/:id" component={ShowArtwork} />
             </div>
           </div>
         </BrowserRouter>

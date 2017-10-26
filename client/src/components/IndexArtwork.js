@@ -28,7 +28,7 @@ class IndexArtwork extends Component {
                 <p>Teacher: {art.teacher}</p>
               </div>
               <div className="card-action">
-                <Link to={`/artwork/${art._id}`}>Expand Artwork</Link>
+                <Link to={`/artwork/show/${art._id}`}>Expand Artwork</Link>
               </div>
             </div>
           </div>
