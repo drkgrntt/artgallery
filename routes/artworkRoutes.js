@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const isLoggedIn = require('../middleware/isLoggedIn');
 const isAdmin = require('../middleware/isAdmin');
 
-const Artwork = require('../models/artwork');
+const Artwork = require('../models/Artwork');
 
 module.exports = (app) => {
   app.get('/api/artwork', async (req, res) => {
