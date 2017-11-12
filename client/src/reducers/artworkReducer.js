@@ -1,8 +1,8 @@
+import _ from 'lodash';
 import { 
   FETCH_ARTWORK,
   FETCH_PIECE
 } from '../actions/types';
-import _ from 'lodash';
 
 export default (state = [], action) => {
   switch (action.type) {

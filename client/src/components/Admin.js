@@ -34,8 +34,8 @@ class Admin extends Component {
 
     return (
       <div className="row">
-        <div className="col s3"></div>
-        <div className="col s6">
+        <div className="col m3"></div>
+        <div className="col m6 s12">
           <div className="card blue-grey darken-1">
             <div className="card-content white-text">
               <span className="card-title">Become an Admin!</span>
@@ -53,7 +53,7 @@ class Admin extends Component {
             </form>
           </div>
         </div>
-        <div className="col s3"></div>
+        <div className="col m3"></div>
       </div>
     );
   }

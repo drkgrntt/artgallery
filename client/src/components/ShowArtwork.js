@@ -22,8 +22,8 @@ class ShowArtwork extends Component {
 
     return (
       <div className="row">
-        <div className="col s2"></div>
-        <div className="col s8">
+        <div className="col m2"></div>
+        <div className="col m8 s12">
           <div className="card">
             <div className="card-image">
               <img src={piece.image} />
@@ -42,7 +42,7 @@ class ShowArtwork extends Component {
             </div>
           </div>
         </div>
-        <div className="col s2"></div>
+        <div className="col m2"></div>
       </div>
     );
   }

@@ -3,7 +3,9 @@ import {
   FETCH_USER,
   CREATE_ARTWORK,
   FETCH_ARTWORK,
-  FETCH_PIECE
+  FETCH_PIECE,
+  UPLOAD_DOCUMENT_SUCCESS,
+  UPLOAD_DOCUMENT_FAIL,
 } from './types';
 
 export const fetchUser = () => async (dispatch) => {
@@ -20,7 +22,16 @@ export const makeAdmin = (value, history) => async (dispatch) => {
 };
 
 export const createArtwork = (values, history) => async (dispatch) => {
-  const res = await axios.post('/api/artwork', values);
+  let formData = new FormData();
+  for (const key in values) {
+    if (key === 'image') {
+      formData.append(key, values[key][0]);
+    } else {
+      formData.append(key, values[key]);
+    }
+  }
+
+  const res = await axios.post('/api/artwork', formData);
 
   history.push('/artwork');
   dispatch({ type: CREATE_ARTWORK, payload: res.data });

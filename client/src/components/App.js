@@ -6,7 +6,6 @@ import * as actions from '../actions';
 import Header from './Header';
 import AddArtwork from './AddArtwork';
 import ShowArtwork from './ShowArtwork';
-import Login from './Login';
 import Admin from './Admin';
 import IndexArtwork from './IndexArtwork';
 import Landing from './Landing';
@@ -24,7 +23,6 @@ class App extends Component {
             <Header />
             <div className="container">
               <Route exact path="/" component={Landing} />
-              <Route exact path="/login" component={Login} />
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/artwork" component={IndexArtwork} />
               <Route exact path="/artwork/show/:id" component={ShowArtwork} />
