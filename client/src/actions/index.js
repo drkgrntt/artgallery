@@ -3,9 +3,7 @@ import {
   FETCH_USER,
   CREATE_ARTWORK,
   FETCH_ARTWORK,
-  FETCH_PIECE,
-  UPLOAD_DOCUMENT_SUCCESS,
-  UPLOAD_DOCUMENT_FAIL,
+  FETCH_PIECE
 } from './types';
 
 export const fetchUser = () => async (dispatch) => {
