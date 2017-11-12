@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const multer = require('multer');
-const axios = require('axios');
 const cloudinary = require('cloudinary');
 const keys = require('../config/keys');
 const isLoggedIn = require('../middleware/isLoggedIn');
