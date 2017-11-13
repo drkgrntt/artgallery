@@ -7,7 +7,13 @@ const artSchema = new Schema({
   teacher: String,
   level: String,
   description: String,
-  created: { type: Date, default: Date.now }
+  created: { type: Date, default: Date.now },
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'comment'
+    }
+  ]
 });
 
 module.exports = mongoose.model('artwork', artSchema);

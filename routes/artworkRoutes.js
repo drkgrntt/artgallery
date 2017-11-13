@@ -56,4 +56,10 @@ module.exports = (app) => {
       res.send(artwork);
     });
   });
+
+  app.delete('/api/artwork/:id', isLoggedIn, isAdmin, async (req, res) => {
+    const burnTheArt = await Artwork.findByIdAndRemove(req.params.id);
+
+    res.send(burnTheArt);
+  });
 };

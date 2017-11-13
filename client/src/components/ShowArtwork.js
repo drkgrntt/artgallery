@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchPiece } from '../actions';
+import { Link, withRouter } from 'react-router-dom';
+import { fetchPiece, deletePiece } from '../actions';
 
 class ShowArtwork extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchPiece(id);
+  }
+
+  onDeleteClick() {
+    const { id } = this.props.match.params;
+    const { history } = this.props;
+
+    this.props.deletePiece(id, history);
+  }
+
+  renderAdminContent() {
+    switch (this.props.auth && this.props.auth.isAdmin) {
+      case null:
+        return;
+      case false:
+        return;
+      default:
+        return (
+          <a style={{ cursor: 'pointer' }} onClick={this.onDeleteClick.bind(this)}>
+            Delete Piece
+          </a>
+        );
+    }
   }
 
   render() {
@@ -15,7 +37,7 @@ class ShowArtwork extends Component {
     if (!piece) {
       return (
         <div className="progress">
-            <div className="indeterminate"></div>
+          <div className="indeterminate"></div>
         </div>
       );
     }
@@ -39,6 +61,7 @@ class ShowArtwork extends Component {
             </div>
             <div className="card-action">
               <Link to="/artwork">Back to the Gallery</Link>
+              {this.renderAdminContent()}
             </div>
           </div>
         </div>
@@ -52,4 +75,4 @@ const mapStateToProps = ({ artwork }, ownProps) => {
   return { piece: artwork[ownProps.match.params._id] };
 }
 
-export default connect(mapStateToProps, { fetchPiece })(ShowArtwork);
+export default connect(mapStateToProps, { fetchPiece, deletePiece })(withRouter(ShowArtwork));

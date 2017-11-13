@@ -3,7 +3,9 @@ import {
   FETCH_USER,
   CREATE_ARTWORK,
   FETCH_ARTWORK,
-  FETCH_PIECE
+  FETCH_PIECE,
+  DELETE_PIECE,
+  UPDATE_PIECE
 } from './types';
 
 export const fetchUser = () => async (dispatch) => {
@@ -45,4 +47,11 @@ export const fetchPiece = (id, values) => async (dispatch) => {
   const res = await axios.get(`/api/artwork/${id}`, values);
 
   dispatch({ type: FETCH_PIECE, payload: res.data });
+};
+
+export const deletePiece = (id, history) => async (dispatch) => {
+  const res = await axios.delete(`/api/artwork/${id}`);
+
+  history.push('/artwork');
+  dispatch({ type: DELETE_PIECE, payload: res.id });
 };
