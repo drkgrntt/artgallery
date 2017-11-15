@@ -18,7 +18,7 @@ class IndexArtwork extends Component {
       return (
         <li key={art._id}>
           <div className="col s12 m6 l3">
-            <div className="card">
+            <div className="card hoverable">
               <div className="card-image">
                 <img src={art.image} />
               </div>

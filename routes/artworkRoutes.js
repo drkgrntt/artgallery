@@ -33,7 +33,8 @@ module.exports = (app) => {
   });
 
   app.get('/api/artwork/:id', async (req, res) => {
-    const artwork = await Artwork.findById(req.params.id);
+    const artwork = await Artwork.findById(req.params.id)
+      .populate('comments');
 
     res.send(artwork);
   });

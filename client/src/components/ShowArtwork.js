@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
+import AddComment from './AddComment';
 import { fetchPiece, deletePiece } from '../actions';
 
 class ShowArtwork extends Component {
@@ -11,9 +13,47 @@ class ShowArtwork extends Component {
 
   onDeleteClick() {
     const { id } = this.props.match.params;
-    const { history } = this.props;
+    const { history, deletePiece } = this.props;
 
-    this.props.deletePiece(id, history);
+    deletePiece(id, history);
+  }
+
+  renderComments() {
+    const { comments } = this.props.piece;
+
+    if (!comments) {
+      return <span>Be the first to leave a comment!</span>;
+    }
+
+    return _.map(comments, (comment) => {
+      return [
+        <div key={comment.id}>
+          <span>
+            {comment.text}
+          </span>
+          <br />
+          <a href="#" className="red-text">Delete Comment</a>
+          <span className="right" style={{ fontStyle: 'italic' }}>
+            {comment.author.name}
+          </span>
+          <br />
+          <hr />
+        </div>
+      ];
+    });
+  }
+
+  renderLoggedInContent() {
+    switch (this.props.auth) {
+      case null:
+        return;
+      case false:
+        return <a href="/auth/google">Log in to comment!</a>;
+      default:
+        return (
+          <AddComment />
+        );
+    }
   }
 
   renderAdminContent() {
@@ -44,8 +84,8 @@ class ShowArtwork extends Component {
 
     return (
       <div className="row">
-        <div className="col m2"></div>
-        <div className="col m8 s12">
+        <div className="col l2"></div>
+        <div className="col l8 m12">
           <div className="card">
             <div className="card-image">
               <img src={piece.image} />
@@ -64,6 +104,14 @@ class ShowArtwork extends Component {
               {this.renderAdminContent()}
             </div>
           </div>
+          <div className="row">
+            <div className="col s12">
+              <div className="card-panel">
+                {this.renderComments()}
+                {this.renderLoggedInContent()}
+              </div>
+            </div>
+          </div>
         </div>
         <div className="col m2"></div>
       </div>
@@ -71,8 +119,8 @@ class ShowArtwork extends Component {
   }
 }
 
-const mapStateToProps = ({ artwork }, ownProps) => {
-  return { piece: artwork[ownProps.match.params._id] };
+const mapStateToProps = ({ artwork, auth }, ownProps) => {
+  return { piece: artwork[ownProps.match.params._id], auth };
 }
 
 export default connect(mapStateToProps, { fetchPiece, deletePiece })(withRouter(ShowArtwork));

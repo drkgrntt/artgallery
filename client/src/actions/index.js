@@ -5,7 +5,8 @@ import {
   FETCH_ARTWORK,
   FETCH_PIECE,
   DELETE_PIECE,
-  UPDATE_PIECE
+  FETCH_COMMENTS,
+  CREATE_COMMENT
 } from './types';
 
 export const fetchUser = () => async (dispatch) => {
@@ -54,4 +55,11 @@ export const deletePiece = (id, history) => async (dispatch) => {
 
   history.push('/artwork');
   dispatch({ type: DELETE_PIECE, payload: res.id });
+};
+
+export const createComment = (id, text, history) => async (dispatch) => {
+  const res = await axios.post(`/api/artwork/${id}/comments`, text);
+
+  history.push(`/artwork/show/${id}`);
+  dispatch({ type: FETCH_PIECE, payload: res.data });
 };
