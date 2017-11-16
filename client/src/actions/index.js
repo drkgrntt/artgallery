@@ -60,6 +60,7 @@ export const deletePiece = (id, history) => async (dispatch) => {
 export const createComment = (id, text, history) => async (dispatch) => {
   const res = await axios.post(`/api/artwork/${id}/comments`, text);
 
+  history.push('/artwork');
   history.push(`/artwork/show/${id}`);
-  dispatch({ type: FETCH_PIECE, payload: res.data });
+  dispatch({ type: CREATE_COMMENT, payload: res.data });
 };

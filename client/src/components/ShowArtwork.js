@@ -32,7 +32,7 @@ class ShowArtwork extends Component {
             {comment.text}
           </span>
           <br />
-          <a href="#" className="red-text">Delete Comment</a>
+          
           <span className="right" style={{ fontStyle: 'italic' }}>
             {comment.author.name}
           </span>
