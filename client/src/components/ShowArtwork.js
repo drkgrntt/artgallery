@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import AddComment from './AddComment';
-import { fetchPiece, deletePiece } from '../actions';
+import { fetchPiece, deletePiece, deleteComment } from '../actions';
 
 class ShowArtwork extends Component {
   componentDidMount() {
@@ -18,11 +18,39 @@ class ShowArtwork extends Component {
     deletePiece(id, history);
   }
 
+  onDeleteCommentClick(comment) {
+    const pieceId = this.props.match.params.id;
+    const commentId = comment._id;
+    const { history, deleteComment, } = this.props;
+
+    deleteComment(pieceId, commentId, history);
+  }
+
+  renderCommentOwnership(comment) {
+    const { auth } = this.props;
+
+    if (auth.name === comment.author.name || auth.isAdmin) {
+      return (
+        <a 
+          className="red-text"
+          style={{ cursor: 'pointer' }}
+          onClick={this.onDeleteCommentClick.bind(this, comment)}
+        >
+          Delete Comment
+        </a>
+      );
+    }
+
+    return;
+  }
+
   renderComments() {
     const { comments } = this.props.piece;
 
     if (!comments) {
-      return <span>Be the first to leave a comment!</span>;
+      return (
+        <span>Be the first to leave a comment!</span>
+      );
     }
 
     return _.map(comments, (comment) => {
@@ -32,7 +60,7 @@ class ShowArtwork extends Component {
             {comment.text}
           </span>
           <br />
-          
+          {this.renderCommentOwnership(comment)}
           <span className="right" style={{ fontStyle: 'italic' }}>
             {comment.author.name}
           </span>
@@ -50,9 +78,7 @@ class ShowArtwork extends Component {
       case false:
         return <a href="/auth/google">Log in to comment!</a>;
       default:
-        return (
-          <AddComment />
-        );
+        return <AddComment />;
     }
   }
 
@@ -64,7 +90,11 @@ class ShowArtwork extends Component {
         return;
       default:
         return (
-          <a style={{ cursor: 'pointer' }} onClick={this.onDeleteClick.bind(this)}>
+          <a
+            className="right"
+            style={{ cursor: 'pointer' }}
+            onClick={this.onDeleteClick.bind(this)}
+          >
             Delete Piece
           </a>
         );
@@ -123,4 +153,4 @@ const mapStateToProps = ({ artwork, auth }, ownProps) => {
   return { piece: artwork[ownProps.match.params._id], auth };
 }
 
-export default connect(mapStateToProps, { fetchPiece, deletePiece })(withRouter(ShowArtwork));
+export default connect(mapStateToProps, { fetchPiece, deletePiece, deleteComment })(withRouter(ShowArtwork));

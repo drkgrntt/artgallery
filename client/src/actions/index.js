@@ -5,8 +5,9 @@ import {
   FETCH_ARTWORK,
   FETCH_PIECE,
   DELETE_PIECE,
-  FETCH_COMMENTS,
-  CREATE_COMMENT
+  CREATE_COMMENT,
+  DELETE_COMMENT,
+  FETCH_COMMENTS
 } from './types';
 
 export const fetchUser = () => async (dispatch) => {
@@ -38,8 +39,8 @@ export const createArtwork = (values, history) => async (dispatch) => {
   dispatch({ type: CREATE_ARTWORK, payload: res.data });
 };
 
-export const fetchArtwork = (values) => async (dispatch) => {
-  const res = await axios.get('/api/artwork', values);
+export const fetchArtwork = () => async (dispatch) => {
+  const res = await axios.get('/api/artwork');
 
   dispatch({ type: FETCH_ARTWORK, payload: res.data });
 };
@@ -63,4 +64,12 @@ export const createComment = (id, text, history) => async (dispatch) => {
   history.push('/artwork');
   history.push(`/artwork/show/${id}`);
   dispatch({ type: CREATE_COMMENT, payload: res.data });
+};
+
+export const deleteComment = (pieceId, commentId, history) => async (dispatch) => {
+  const res = await axios.delete(`/api/artwork/${pieceId}/comments/${commentId}`);
+
+  history.push('/artwork');
+  history.push(`/artwork/show/${pieceId}`);
+  dispatch({ type: DELETE_COMMENT, payload: res.commentId });
 };

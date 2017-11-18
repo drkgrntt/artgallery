@@ -21,4 +21,10 @@ module.exports = (app) => {
     artwork.save();
     res.send(comment);
   });
+
+  app.delete('/api/artwork/:id/comments/:comment_id', isLoggedIn, async (req, res) => {
+    const burnTheComment = await Comment.findByIdAndRemove(req.params.comment_id);
+
+    res.send(burnTheComment);
+  });
 };
