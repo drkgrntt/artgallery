@@ -31,13 +31,22 @@ class ShowArtwork extends Component {
 
     if (auth.name === comment.author.name || auth.isAdmin) {
       return (
-        <a 
-          className="red-text"
-          style={{ cursor: 'pointer' }}
-          onClick={this.onDeleteCommentClick.bind(this, comment)}
-        >
-          Delete Comment
-        </a>
+        <div style={{ display: 'inline' }}>
+          <a 
+            className="red-text"
+            style={{ cursor: 'pointer' }}
+            onClick={this.onDeleteCommentClick.bind(this, comment)}
+          >
+            Delete Comment
+          </a>
+          <Link
+            to="#"
+            className="orange-text"
+            style={{ cursor: 'pointer', margin: '15px' }}
+          >
+            Edit Comment
+          </Link>
+        </div>
       );
     }
 
@@ -89,14 +98,24 @@ class ShowArtwork extends Component {
       case false:
         return;
       default:
+        const { id } = this.props.match.params;
+    
         return (
-          <a
-            className="right"
-            style={{ cursor: 'pointer' }}
-            onClick={this.onDeleteClick.bind(this)}
-          >
-            Delete Piece
-          </a>
+          <div style={{ display: "inline" }}>
+            <a
+              className="right red-text"
+              style={{ cursor: 'pointer' }}
+              onClick={this.onDeleteClick.bind(this)}
+            >
+              Delete Piece
+            </a>
+            <Link
+              to={`/artwork/update/${id}`}
+              className="right"
+            >
+              Edit Piece
+            </Link>
+          </div>
         );
     }
   }
@@ -151,6 +170,6 @@ class ShowArtwork extends Component {
 
 const mapStateToProps = ({ artwork, auth }, ownProps) => {
   return { piece: artwork[ownProps.match.params._id], auth };
-}
+};
 
 export default connect(mapStateToProps, { fetchPiece, deletePiece, deleteComment })(withRouter(ShowArtwork));

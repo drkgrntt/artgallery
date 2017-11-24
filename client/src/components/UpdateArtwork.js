@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createArtwork } from '../actions';
-import FileInput from './FileInput';
+import { updateArtwork, fetchPiece } from '../actions';
 
-class AddArtwork extends Component {
+class UpdateArtwork extends Component {
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    
+    this.props.fetchPiece(id);
+  }
+  
   renderField(field) { 
     return (
       <div className="input-field">
@@ -17,24 +22,26 @@ class AddArtwork extends Component {
       </div>
     );
   }
-
+  
   onSubmit(values) {
-    const { createArtwork, history } = this.props;
+    const { updateArtwork, history } = this.props;
+    const { id } = this.props.match.params;
 
-    createArtwork(values, history);
+    updateArtwork(id, values, history);
   }
-
+  
   render() {
-    const { handleSubmit } = this.props;
-
+    const { handleSubmit, piece } = this.props;
+    const { id } = this.props.match.params;
+    
     return (
       <div className="card-panel">
-        <h4>Add a piece of artwork!</h4>
-        <form encType="multipart/form-data" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <h4>Edit this piece.</h4>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
-            label="Upload Artwork"
+            label="Artwork URL"
             name="image"
-            component={FileInput}
+            component={this.renderField}
           />
           <Field
             label="Artist"
@@ -63,7 +70,7 @@ class AddArtwork extends Component {
             Submit
           </button>
           <Link 
-            to="/artwork" 
+            to={`/artwork/show/${id}`}
             style={{ margin: '0 5px' }} 
             className="waves-light waves-effect btn"
           >
@@ -75,8 +82,16 @@ class AddArtwork extends Component {
   }
 }
 
-export default reduxForm({
-  form: 'AddArtworkForm'
-})(
-  connect(null, { createArtwork })(withRouter(AddArtwork))
-);
+const mapStateToProps = ({ artwork }, ownProps) => {
+  return { 
+    piece: artwork[ownProps.match.params._id], 
+    initialValues: artwork[ownProps.match.params._id]
+  };
+};
+
+const UpdateArtworkForm = reduxForm({
+  form: 'UpdateArtworkForm',
+  enableReinitialize: true
+})(UpdateArtwork);
+
+export default connect(mapStateToProps, { updateArtwork, fetchPiece })(withRouter(UpdateArtworkForm));

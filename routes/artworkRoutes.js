@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const multer = require('multer');
 const cloudinary = require('cloudinary');
 const keys = require('../config/keys');
@@ -56,6 +55,12 @@ module.exports = (app) => {
       artwork.save();
       res.send(artwork);
     });
+  });
+  
+  app.put('/api/artwork/:id', isLoggedIn, isAdmin, async (req, res) => {
+    const turnItIntoAShrub = await Artwork.findByIdAndUpdate(req.params.id, req.body);
+    
+    res.send(turnItIntoAShrub);
   });
 
   app.delete('/api/artwork/:id', isLoggedIn, isAdmin, async (req, res) => {

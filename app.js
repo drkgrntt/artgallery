@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const PORT = process.env.PORT || 9001;
-app.listen(PORT, () => {
+const PORT = 8081 || process.env.PORT;
+app.listen(PORT, process.env.IP, () => {
   console.log('Server is running!');
 });
