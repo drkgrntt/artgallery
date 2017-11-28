@@ -58,9 +58,9 @@ module.exports = (app) => {
   });
   
   app.put('/api/artwork/:id', isLoggedIn, isAdmin, async (req, res) => {
-    const turnItIntoAShrub = await Artwork.findByIdAndUpdate(req.params.id, req.body);
+    const turnTheArtIntoAShrub = await Artwork.findByIdAndUpdate(req.params.id, req.body);
     
-    res.send(turnItIntoAShrub);
+    res.send(turnTheArtIntoAShrub);
   });
 
   app.delete('/api/artwork/:id', isLoggedIn, isAdmin, async (req, res) => {

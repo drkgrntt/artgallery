@@ -8,6 +8,7 @@ import { fetchPiece, deletePiece, deleteComment } from '../actions';
 class ShowArtwork extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
+    
     this.props.fetchPiece(id);
   }
 
@@ -27,6 +28,8 @@ class ShowArtwork extends Component {
   }
 
   renderCommentOwnership(comment) {
+    const pieceId = this.props.match.params.id;
+    const commentId = comment._id;
     const { auth } = this.props;
 
     if (auth.name === comment.author.name || auth.isAdmin) {
@@ -40,7 +43,7 @@ class ShowArtwork extends Component {
             Delete Comment
           </a>
           <Link
-            to="#"
+            to={`/artwork/show/${pieceId}/update/${commentId}`}
             className="orange-text"
             style={{ cursor: 'pointer', margin: '15px' }}
           >

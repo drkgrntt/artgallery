@@ -7,7 +7,9 @@ import {
   DELETE_PIECE,
   CREATE_COMMENT,
   DELETE_COMMENT,
-  UPDATE_ARTWORK
+  UPDATE_ARTWORK,
+  UPDATE_COMMENT,
+  FETCH_COMMENT
 } from './types';
 
 export const fetchUser = () => async (dispatch) => {
@@ -45,8 +47,8 @@ export const fetchArtwork = () => async (dispatch) => {
   dispatch({ type: FETCH_ARTWORK, payload: res.data });
 };
 
-export const fetchPiece = (id, values) => async (dispatch) => {
-  const res = await axios.get(`/api/artwork/${id}`, values);
+export const fetchPiece = (id) => async (dispatch) => {
+  const res = await axios.get(`/api/artwork/${id}`);
 
   dispatch({ type: FETCH_PIECE, payload: res.data });
 };
@@ -79,4 +81,18 @@ export const updateArtwork = (id, values, history) => async (dispatch) => {
   
   history.push(`/artwork/show/${id}`);
   dispatch({ type: UPDATE_ARTWORK, payload: res.data });
+};
+
+export const updateComment = (id, comment_id, text, history) => async (dispatch) => {
+  const res = await axios.put(`/api/artwork/${id}/comments/${comment_id}`, text);
+  
+  history.push('/artwork');
+  history.push(`/artwork/show/${id}`);
+  dispatch({ type: UPDATE_COMMENT, payload: res.data });
+};
+
+export const fetchComment = (id, comment_id) => async (dispatch) => {
+  const res = await axios.get(`/api/artwork/${id}/comments/${comment_id}`);
+  
+  dispatch({ type: FETCH_COMMENT, payload: res.data });
 };

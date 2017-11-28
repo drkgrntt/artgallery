@@ -6,4 +6,5 @@ export const DELETE_PIECE = 'delete_piece';
 export const UPDATE_ARTWORK = 'update_artwork';
 export const CREATE_COMMENT = 'create_comment';
 export const DELETE_COMMENT = 'delete_comment';
-export const FETCH_COMMENTS = 'fetch_comments';
+export const UPDATE_COMMENT = 'update_comment';
+export const FETCH_COMMENT = 'fetch_comment';

@@ -31,12 +31,12 @@ class UpdateArtwork extends Component {
   }
   
   render() {
-    const { handleSubmit, piece } = this.props;
+    const { handleSubmit } = this.props;
     const { id } = this.props.match.params;
     
     return (
       <div className="card-panel">
-        <h4>Edit this piece.</h4>
+        <h4>Edit this piece</h4>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             label="Artwork URL"

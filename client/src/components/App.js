@@ -10,6 +10,7 @@ import Admin from './Admin';
 import IndexArtwork from './IndexArtwork';
 import Landing from './Landing';
 import UpdateArtwork from './UpdateArtwork';
+import UpdateComment from './UpdateComment';
 
 class App extends Component {
   componentDidMount() {
@@ -28,6 +29,7 @@ class App extends Component {
               <Route exact path="/artwork" component={IndexArtwork} />
               <Route exact path="/artwork/show/:id" component={ShowArtwork} />
               <Route exact path="/artwork/update/:id" component={UpdateArtwork} />
+              <Route exact path="/artwork/show/:id/update/:comment_id" component={UpdateComment} />
               <Route exact path="/artwork/add" component={AddArtwork} />
             </div>
           </div>

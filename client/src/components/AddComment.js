@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createComment } from '../actions';
 
-class CommentForm extends Component {
+class AddComment extends Component {
   renderField(field) { 
     return (
       <div className="input-field">
@@ -50,5 +50,5 @@ class CommentForm extends Component {
 export default reduxForm({
   form: 'AddCommentForm'
 })(
-  connect(null, { createComment })(withRouter(CommentForm))
+  connect(null, { createComment })(withRouter(AddComment))
 );
