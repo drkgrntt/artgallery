@@ -5,15 +5,18 @@ import _ from 'lodash';
 import { fetchArtwork } from '../actions';
 
 class IndexArtwork extends Component {
+  // FETCH ALL ARTWORK
   componentDidMount() {
     this.props.fetchArtwork();
   }
-
+  
+  // CARD FOR EACH ARTWORK PIECE
   renderArtworkCard() {
     if (!this.props.artwork) {
-      return <h1>No artwork yet!</h1>
+      return <h1>No artwork yet!</h1>;
     }
-
+    
+    // return one card for each artwork piece
     return _.map(this.props.artwork, (art) => {
       return (
         <li key={art._id}>
@@ -36,7 +39,8 @@ class IndexArtwork extends Component {
       );
     }); 
   }
-
+  
+  // RENDER INDEX ARTWORK COMPONENT
   render() {
     return (
       <div className="row">
@@ -48,8 +52,9 @@ class IndexArtwork extends Component {
   }
 }
 
+// PULL ARTWORK FROM STATE
 const mapStateToProps = (state) => {
   return { artwork: state.artwork };
-}
+};
 
 export default connect(mapStateToProps, { fetchArtwork })(IndexArtwork);

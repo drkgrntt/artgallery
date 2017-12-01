@@ -10,6 +10,7 @@ const artSchema = new Schema({
   created: { type: Date, default: Date.now },
   comments: [
     {
+      // './Comment.js'
       type: mongoose.Schema.Types.ObjectId,
       ref: 'comment'
     }

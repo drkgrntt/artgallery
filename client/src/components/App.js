@@ -13,10 +13,12 @@ import UpdateArtwork from './UpdateArtwork';
 import UpdateComment from './UpdateComment';
 
 class App extends Component {
+  // FETCH CURRENT USER
   componentDidMount() {
     this.props.fetchUser();
   }
-
+  
+  // RENDER VIRTUAL DOM
   render() {
     return (
       <div>

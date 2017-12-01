@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 import { updateArtwork, fetchPiece } from '../actions';
 
 class UpdateArtwork extends Component {
+  // FETCH SELECTED ARTWORK PIECE TO EDIT
   componentDidMount() {
     const { id } = this.props.match.params;
     
     this.props.fetchPiece(id);
   }
   
+  // RENDER TEXT INPUT FIELD
   renderField(field) { 
     return (
       <div className="input-field">
@@ -23,6 +25,7 @@ class UpdateArtwork extends Component {
     );
   }
   
+  // HANDLE SUBMIT
   onSubmit(values) {
     const { updateArtwork, history } = this.props;
     const { id } = this.props.match.params;
@@ -30,6 +33,7 @@ class UpdateArtwork extends Component {
     updateArtwork(id, values, history);
   }
   
+  // RENDER PRE-FILLED ARTWORK FORM
   render() {
     const { handleSubmit } = this.props;
     const { id } = this.props.match.params;
@@ -38,6 +42,7 @@ class UpdateArtwork extends Component {
       <div className="card-panel">
         <h4>Edit this piece</h4>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          {/* this field will have a cloudinary url*/}
           <Field
             label="Artwork URL"
             name="image"
@@ -82,15 +87,19 @@ class UpdateArtwork extends Component {
   }
 }
 
+// TURN ARTWORK PIECE INTO A PROP
 const mapStateToProps = ({ artwork }, ownProps) => {
   return { 
     piece: artwork[ownProps.match.params._id], 
+    // set initial form values from artwork
     initialValues: artwork[ownProps.match.params._id]
   };
 };
 
+// FORM CONFIG
 const UpdateArtworkForm = reduxForm({
   form: 'UpdateArtworkForm',
+  // for asynchronous fetchPiece action
   enableReinitialize: true
 })(UpdateArtwork);
 

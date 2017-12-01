@@ -12,12 +12,14 @@ import {
   FETCH_COMMENT
 } from './types';
 
+// FETCH CURRENT USER FOR LIFE CYCLE
 export const fetchUser = () => async (dispatch) => {
   const res = await axios.get('/api/currentUser');
 
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
+// MAKE THE CURRENT USER AN ADMIN AND REDIRECT
 export const makeAdmin = (value, history) => async (dispatch) => {
   const res = await axios.post('/api/admin', value);
 
@@ -25,8 +27,10 @@ export const makeAdmin = (value, history) => async (dispatch) => {
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
+// CREATE A PIECE OF ARTWORK AND REDIRECT
 export const createArtwork = (values, history) => async (dispatch) => {
   let formData = new FormData();
+  // combining input field and text fields into one object
   for (const key in values) {
     if (key === 'image') {
       formData.append(key, values[key][0]);
@@ -41,18 +45,21 @@ export const createArtwork = (values, history) => async (dispatch) => {
   dispatch({ type: CREATE_ARTWORK, payload: res.data });
 };
 
+// FETCH ALL CREATED ARTWORK FOR INDEX COMPONENT
 export const fetchArtwork = () => async (dispatch) => {
   const res = await axios.get('/api/artwork');
 
   dispatch({ type: FETCH_ARTWORK, payload: res.data });
 };
 
+// FETCH DATA ON ONE ARTWORK PIECE FOR SHOW AND UPDATE COMPONENTS
 export const fetchPiece = (id) => async (dispatch) => {
   const res = await axios.get(`/api/artwork/${id}`);
 
   dispatch({ type: FETCH_PIECE, payload: res.data });
 };
 
+// DELETE SELECTED ARTWORK PIECE AND REDIRECT
 export const deletePiece = (id, history) => async (dispatch) => {
   const res = await axios.delete(`/api/artwork/${id}`);
 
@@ -60,6 +67,7 @@ export const deletePiece = (id, history) => async (dispatch) => {
   dispatch({ type: DELETE_PIECE, payload: res.id });
 };
 
+// CREATE A COMMENT AND REDIRECT
 export const createComment = (id, text, history) => async (dispatch) => {
   const res = await axios.post(`/api/artwork/${id}/comments`, text);
 
@@ -68,6 +76,7 @@ export const createComment = (id, text, history) => async (dispatch) => {
   dispatch({ type: CREATE_COMMENT, payload: res.data });
 };
 
+// DELETE A COMMENT AND REDIRECT
 export const deleteComment = (pieceId, commentId, history) => async (dispatch) => {
   const res = await axios.delete(`/api/artwork/${pieceId}/comments/${commentId}`);
 
@@ -76,6 +85,7 @@ export const deleteComment = (pieceId, commentId, history) => async (dispatch) =
   dispatch({ type: DELETE_COMMENT, payload: res.commentId });
 };
 
+// UPDATE A PIECE OF ARTWORK AND REDIRECT
 export const updateArtwork = (id, values, history) => async (dispatch) => {
   const res = await axios.put(`/api/artwork/${id}`, values);
   
@@ -83,6 +93,7 @@ export const updateArtwork = (id, values, history) => async (dispatch) => {
   dispatch({ type: UPDATE_ARTWORK, payload: res.data });
 };
 
+// UPDATE A COMMENT AND REDIRECT
 export const updateComment = (id, comment_id, text, history) => async (dispatch) => {
   const res = await axios.put(`/api/artwork/${id}/comments/${comment_id}`, text);
   
@@ -91,6 +102,7 @@ export const updateComment = (id, comment_id, text, history) => async (dispatch)
   dispatch({ type: UPDATE_COMMENT, payload: res.data });
 };
 
+// FETCH DATA FOR ONE COMMENT FOR COMMENT UPDATE COMPONENT
 export const fetchComment = (id, comment_id) => async (dispatch) => {
   const res = await axios.get(`/api/artwork/${id}/comments/${comment_id}`);
   

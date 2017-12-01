@@ -6,12 +6,14 @@ import AddComment from './AddComment';
 import { fetchPiece, deletePiece, deleteComment } from '../actions';
 
 class ShowArtwork extends Component {
+  // FETCH INDIVIDUAL PIECE OF ART TO EXPAND
   componentDidMount() {
     const { id } = this.props.match.params;
     
     this.props.fetchPiece(id);
   }
 
+  // HANDLE DELETE PIECE (AVAILABLE TO ADMIN ONLY)
   onDeleteClick() {
     const { id } = this.props.match.params;
     const { history, deletePiece } = this.props;
@@ -19,6 +21,7 @@ class ShowArtwork extends Component {
     deletePiece(id, history);
   }
 
+  // HANDLE DELETE COMMENT (AVAILABLE TO COMMENT OWNER AND ADMIN)
   onDeleteCommentClick(comment) {
     const pieceId = this.props.match.params.id;
     const commentId = comment._id;
@@ -27,6 +30,7 @@ class ShowArtwork extends Component {
     deleteComment(pieceId, commentId, history);
   }
 
+  // MAKE DELETE AND EDIT COMMENT BUTTONS VISIBLE ONLY TO COMMENT OWNER AND ADMIN
   renderCommentOwnership(comment) {
     const pieceId = this.props.match.params.id;
     const commentId = comment._id;
@@ -56,6 +60,7 @@ class ShowArtwork extends Component {
     return;
   }
 
+  // RENDER DISPLAY OF EACH COMMENT BELONGING TO THE FETCHED PIECE
   renderComments() {
     const { comments } = this.props.piece;
 
@@ -83,6 +88,7 @@ class ShowArtwork extends Component {
     });
   }
 
+  // RENDER LOGIN LINK OR COMMENT FORM
   renderLoggedInContent() {
     switch (this.props.auth) {
       case null:
@@ -94,6 +100,8 @@ class ShowArtwork extends Component {
     }
   }
 
+  // RENDER EDIT AND DELETE BUTTONS FOR THE ARTWORK PIECE
+  // VISIBLE ONLY TO ADMIN
   renderAdminContent() {
     switch (this.props.auth && this.props.auth.isAdmin) {
       case null:
@@ -123,6 +131,7 @@ class ShowArtwork extends Component {
     }
   }
 
+  // RENDER SHOW PAGE FOR SELECTED PIECE OF ART
   render() {
     const { piece } = this.props;
 
@@ -171,6 +180,7 @@ class ShowArtwork extends Component {
   }
 }
 
+// TURN SELECTED PIECE AND CURRENT USER INTO PROPS
 const mapStateToProps = ({ artwork, auth }, ownProps) => {
   return { piece: artwork[ownProps.match.params._id], auth };
 };

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class Header extends Component {
+  // VISIBLE ONLY TO ADMIN USERS
   renderAdminContent() {
     switch (this.props.auth && this.props.auth.isAdmin) {
       case null:
@@ -16,7 +17,8 @@ class Header extends Component {
         ];
     }
   }
-
+  
+  // CHECK IF USER IS LOGGED IN
   renderContent() {
     switch (this.props.auth) {
       case null:
@@ -32,7 +34,8 @@ class Header extends Component {
         ];
     }
   }
-
+  
+  // RENDER HEADER
   render() {
     return (
       <nav>
@@ -48,8 +51,9 @@ class Header extends Component {
   }
 }
 
+// FOR LOGIN CHECK
 const mapStateToProps = ({ auth }) => {
   return { auth };
-}
+};
 
 export default connect(mapStateToProps)(Header);

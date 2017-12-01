@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { makeAdmin } from '../actions';
 
 class Admin extends Component {
+  // RENDER FORM FIELD
   renderField(field) {
     return (
       <div className="row">
@@ -23,12 +24,14 @@ class Admin extends Component {
     );
   }
 
+  // HANDLE SUBMIT
   onSubmit(value) {
     const { makeAdmin, history } = this.props;
 
     makeAdmin(value, history);
   }
 
+  // RENDER ADMIN FORM PAGE
   render() {
     const { handleSubmit } = this.props;
 

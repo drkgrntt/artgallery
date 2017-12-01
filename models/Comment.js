@@ -5,6 +5,7 @@ const commentSchema = new Schema({
   text: String,
   author: {
     id: {
+      // './User.js'
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user'
     },

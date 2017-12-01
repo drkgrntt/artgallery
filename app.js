@@ -9,10 +9,12 @@ require('./services/passport');
 
 const app = express();
 
+// MONGOOSE CONFIG
 mongoose.connect(keys.mongoURI);
 mongoose.Promise = global.Promise;
-app.use(bodyParser.json());
 
+// MIDDLEWARES
+app.use(bodyParser.json());
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -22,10 +24,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// ROUTES
 require('./routes/authRoutes')(app);
 require('./routes/artworkRoutes')(app);
 require('./routes/commentRoutes')(app);
 
+// LAUNCH FOR PRODUCTION
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   const path = require('path');
@@ -34,6 +38,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// FIRE IT UP
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, process.env.IP, () => {
   console.log('Server is running!');

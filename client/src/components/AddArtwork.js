@@ -6,6 +6,7 @@ import { createArtwork } from '../actions';
 import FileInput from './FileInput';
 
 class AddArtwork extends Component {
+  // RENDER TEXT INPUT FIELD
   renderField(field) { 
     return (
       <div className="input-field">
@@ -18,12 +19,14 @@ class AddArtwork extends Component {
     );
   }
 
+  // HANDLE SUBMIT
   onSubmit(values) {
     const { createArtwork, history } = this.props;
 
     createArtwork(values, history);
   }
 
+  // RENDER ADD ARTWORK FORM COMPONENT
   render() {
     const { handleSubmit } = this.props;
 

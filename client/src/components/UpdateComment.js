@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 import { updateComment, fetchComment } from '../actions';
 
 class UpdateComment extends Component {
+  // FETCH SELECTED COMMENT
   componentDidMount() {
     const { id, comment_id } = this.props.match.params;
     
     this.props.fetchComment(id, comment_id);
   }
   
+  // RENDER TEXT INPUT FIELD
   renderField(field) { 
     return (
       <div className="input-field">
@@ -23,6 +25,7 @@ class UpdateComment extends Component {
     );
   }
 
+  // HANDLE SUBMIT
   onSubmit(text) {
     const { updateComment, history } = this.props;
     const { id, comment_id } = this.props.match.params;
@@ -30,6 +33,7 @@ class UpdateComment extends Component {
     updateComment(id, comment_id, text, history);
   }
 
+  // RENDER COMMENT UPDATE FORM
   render() {
     const { handleSubmit } = this.props;
     const { id } = this.props.match.params;
@@ -62,15 +66,19 @@ class UpdateComment extends Component {
   }
 }
 
+// TURN SELECTED COMMENT INTO A PROP
 const mapStateToProps = ({ comment }, ownProps) => {
   return {
     comment: comment[ownProps.match.params._id],
+    // set initial form value from selected comment
     initialValues: comment[ownProps.match.params._id]
   };
 };
 
+// REDUX FORM CONFIG
 const UpdateCommentForm = reduxForm({
   form: 'UpdateCommentForm',
+  // for asynchronous fetchComment action
   enableReinitialize: true
 })(UpdateComment);
 

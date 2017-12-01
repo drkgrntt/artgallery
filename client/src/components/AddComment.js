@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createComment } from '../actions';
 
 class AddComment extends Component {
+  // TEXT INPUT FIELD
   renderField(field) { 
     return (
       <div className="input-field">
@@ -17,6 +18,7 @@ class AddComment extends Component {
     );
   }
 
+  // HANDLE SUBMIT
   onSubmit(text) {
     const { createComment, history } = this.props;
     const { id } = this.props.match.params;
@@ -24,6 +26,7 @@ class AddComment extends Component {
     createComment(id, text, history);
   }
 
+  // RENDER ADD COMMENT FORM COMPONENT
   render() {
     const { handleSubmit } = this.props;
 
