@@ -39,7 +39,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // FIRE IT UP
-const PORT = process.env.PORT || 8081;
-app.listen(PORT, process.env.IP, () => {
+app.listen(keys.port, process.env.IP, () => {
   console.log('Server is running!');
 });

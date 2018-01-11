@@ -12,7 +12,7 @@ class Header extends Component {
         return;
       default:
         return [
-          <li key="1" style={{ margin: '0 10px' }}>Admin View Enabled</li>,
+          <li key="1" className="hide-on-med-and-down" style={{ margin: '0 10px' }}>Admin View Enabled</li>,
           <li key="2"><Link to="/artwork/add">Add Art</Link></li>
         ];
     }
@@ -25,12 +25,12 @@ class Header extends Component {
         return;
       case false:
         return (
-          <li><a href="/auth/google">Login with Google</a></li>
+          <li><a href="/auth/google">Google Login</a></li>
         );
       default:
         return [
-          <li key="a" style={{ margin: '0 10px' }}>Logged in as {this.props.auth.name}</li>,
-          <li key="b"><a href="/api/logout">Logout</a></li>
+          <li key="a" className="hide-on-med-and-down" style={{ margin: '0 10px' }}>Logged in as {this.props.auth.name}</li>,
+          <li key="b" className="hide-on-med-and-down"><a href="/api/logout">Logout</a></li>
         ];
     }
   }
@@ -41,7 +41,7 @@ class Header extends Component {
       <nav>
         <div className="nav-wrapper container">
           <Link to="/artwork" className="left brand-logo">Art Gallery</Link>
-          <ul className="right hide-on-med-and-down">
+          <ul className="right">
             {this.renderAdminContent()}
             {this.renderContent()}
           </ul>

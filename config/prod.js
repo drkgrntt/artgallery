@@ -7,5 +7,6 @@ module.exports = {
   adminCode: process.env.ADMIN_CODE,
   cloudinaryKey: process.env.CLOUDINARY_KEY,
   cloudinarySecret: process.env.CLOUDINARY_SECRET,
-  cloudinaryEnvVar: process.env.CLOUDINARY_ENV_VAR
+  cloudinaryEnvVar: process.env.CLOUDINARY_ENV_VAR,
+  port: process.env.PORT
 };

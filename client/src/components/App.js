@@ -24,6 +24,7 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div>
+            {this.renderAdmin}
             <Header />
             <div className="container">
               <Route exact path="/" component={Landing} />
