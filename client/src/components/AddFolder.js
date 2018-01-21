@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createArtwork } from '../actions';
+import { createFolder } from '../actions';
 import FileInput from './FileInput';
 
-class AddArtwork extends Component {
+class AddFolder extends Component {
   // RENDER TEXT INPUT FIELD
   renderField(field) { 
     return (
@@ -21,39 +21,27 @@ class AddArtwork extends Component {
 
   // HANDLE SUBMIT
   onSubmit(values) {
-    const { createArtwork, history } = this.props;
-    const { id } = this.props.match.params;
+    const { createFolder, history } = this.props;
 
-    createArtwork(values, id, history);
+    createFolder(values, history);
   }
 
   // RENDER ADD ARTWORK FORM COMPONENT
   render() {
     const { handleSubmit } = this.props;
-    const { id } = this.props.match.params;
 
     return (
       <div className="card-panel">
-        <h4>Add a piece of artwork!</h4>
+        <h4>Create a Gallery!</h4>
         <form encType="multipart/form-data" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
-            label="Upload Artwork"
+            label="Upload Gallery Image"
             name="image"
             component={FileInput}
           />
           <Field
-            label="Artist"
-            name="artist"
-            component={this.renderField}
-          />
-          <Field
-            label="Class"
-            name="teacher"
-            component={this.renderField}
-          />
-          <Field
-            label="Grade"
-            name="level"
+            label="Title"
+            name="title"
             component={this.renderField}
           />
           <Field
@@ -68,7 +56,7 @@ class AddArtwork extends Component {
             Submit
           </button>
           <Link 
-            to={`/gallery/${id}/artwork`}
+            to='/gallery'
             style={{ margin: '0 5px' }} 
             className="waves-light waves-effect btn"
           >
@@ -81,7 +69,7 @@ class AddArtwork extends Component {
 }
 
 export default reduxForm({
-  form: 'AddArtworkForm'
+  form: 'AddFolderForm'
 })(
-  connect(null, { createArtwork })(withRouter(AddArtwork))
+  connect(null, { createFolder })(withRouter(AddFolder))
 );

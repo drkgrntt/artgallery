@@ -7,9 +7,9 @@ import { updateArtwork, fetchPiece } from '../actions';
 class UpdateArtwork extends Component {
   // FETCH SELECTED ARTWORK PIECE TO EDIT
   componentDidMount() {
-    const { id } = this.props.match.params;
+    const { id, artwork_id } = this.props.match.params;
     
-    this.props.fetchPiece(id);
+    this.props.fetchPiece(id, artwork_id);
   }
   
   // RENDER TEXT INPUT FIELD
@@ -28,15 +28,15 @@ class UpdateArtwork extends Component {
   // HANDLE SUBMIT
   onSubmit(values) {
     const { updateArtwork, history } = this.props;
-    const { id } = this.props.match.params;
+    const { id, artwork_id } = this.props.match.params;
 
-    updateArtwork(id, values, history);
+    updateArtwork(id, artwork_id, values, history);
   }
   
   // RENDER PRE-FILLED ARTWORK FORM
   render() {
     const { handleSubmit } = this.props;
-    const { id } = this.props.match.params;
+    const { id, artwork_id } = this.props.match.params;
     
     return (
       <div className="card-panel">
@@ -75,7 +75,7 @@ class UpdateArtwork extends Component {
             Submit
           </button>
           <Link 
-            to={`/artwork/show/${id}`}
+            to={`/gallery/${id}/artwork/show/${artwork_id}`}
             style={{ margin: '0 5px' }} 
             className="waves-light waves-effect btn"
           >
@@ -90,7 +90,6 @@ class UpdateArtwork extends Component {
 // TURN ARTWORK PIECE INTO A PROP
 const mapStateToProps = ({ artwork }, ownProps) => {
   return { 
-    piece: artwork[ownProps.match.params._id], 
     // set initial form values from artwork
     initialValues: artwork[ownProps.match.params._id]
   };

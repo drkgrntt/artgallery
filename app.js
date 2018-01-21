@@ -26,6 +26,7 @@ app.use(passport.session());
 
 // ROUTES
 require('./routes/authRoutes')(app);
+require('./routes/folderRoutes')(app);
 require('./routes/artworkRoutes')(app);
 require('./routes/commentRoutes')(app);
 

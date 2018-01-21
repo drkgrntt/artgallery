@@ -10,13 +10,13 @@ module.exports = (app) => {
 
   // CALLBACK ROUTE FROM GOOGLE OAUTH
   app.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
-    res.redirect('/artwork');
+    res.redirect('/gallery');
   });
 
   // LOGOUT ROUTE
   app.get('/api/logout', (req, res) => {
     req.logout();
-    res.redirect('/artwork');
+    res.redirect('/gallery');
   });
   
   // CURRENT USER ROUTE
@@ -25,11 +25,11 @@ module.exports = (app) => {
   });
 
   // BECOME ADMIN ROUTE
-  app.post('/api/admin', isLoggedIn, async (req, res) => {
+  app.post('/api/admin', isLoggedIn, (req, res) => {
     if (req.body.adminCode === keys.adminCode) {
       req.user.isAdmin = true;
     }
-    const user = await req.user.save();
+    const user = req.user.save();
 
     res.send(user);
   });

@@ -19,7 +19,7 @@ class Landing extends Component {
               </p>
             </div>
             <div className="card-action">
-              <Link to="/artwork">Continue to the Gallery!</Link>
+              <Link to="/gallery">Continue to the Gallery!</Link>
             </div>
           </div>
         </div>

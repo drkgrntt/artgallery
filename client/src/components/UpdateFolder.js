@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createArtwork } from '../actions';
-import FileInput from './FileInput';
+import { updateFolder, fetchFolder } from '../actions';
 
-class AddArtwork extends Component {
+class UpdateFolder extends Component {
+  // FETCH SELECTED ARTWORK PIECE TO EDIT
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    
+    this.props.fetchFolder(id);
+  }
+  
   // RENDER TEXT INPUT FIELD
   renderField(field) { 
     return (
@@ -18,42 +24,33 @@ class AddArtwork extends Component {
       </div>
     );
   }
-
+  
   // HANDLE SUBMIT
   onSubmit(values) {
-    const { createArtwork, history } = this.props;
+    const { updateFolder, history } = this.props;
     const { id } = this.props.match.params;
 
-    createArtwork(values, id, history);
+    updateFolder(id, values, history);
   }
-
-  // RENDER ADD ARTWORK FORM COMPONENT
+  
+  // RENDER PRE-FILLED ARTWORK FORM
   render() {
     const { handleSubmit } = this.props;
     const { id } = this.props.match.params;
-
+    
     return (
       <div className="card-panel">
-        <h4>Add a piece of artwork!</h4>
-        <form encType="multipart/form-data" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <h4>Edit this Gallery</h4>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          {/* this field will have a cloudinary url*/}
           <Field
-            label="Upload Artwork"
+            label="Image URL"
             name="image"
-            component={FileInput}
-          />
-          <Field
-            label="Artist"
-            name="artist"
             component={this.renderField}
           />
           <Field
-            label="Class"
-            name="teacher"
-            component={this.renderField}
-          />
-          <Field
-            label="Grade"
-            name="level"
+            label="Title"
+            name="title"
             component={this.renderField}
           />
           <Field
@@ -80,8 +77,19 @@ class AddArtwork extends Component {
   }
 }
 
-export default reduxForm({
-  form: 'AddArtworkForm'
-})(
-  connect(null, { createArtwork })(withRouter(AddArtwork))
-);
+// TURN ARTWORK PIECE INTO A PROP
+const mapStateToProps = ({ folder }, ownProps) => {
+  return { 
+    // set initial form values from folder
+    initialValues: folder[ownProps.match.params._id]
+  };
+};
+
+// FORM CONFIG
+const UpdateFolderForm = reduxForm({
+  form: 'UpdateFolderForm',
+  // for asynchronous fetchFolder action
+  enableReinitialize: true
+})(UpdateFolder);
+
+export default connect(mapStateToProps, { updateFolder, fetchFolder })(withRouter(UpdateFolderForm));

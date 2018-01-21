@@ -1,16 +1,20 @@
 import _ from 'lodash';
 import { 
-  FETCH_PIECE,
-  DELETE_PIECE
+  FETCH_FOLDERS,
+  FETCH_FOLDER,
+  DELETE_FOLDER
 } from '../actions/types';
 
 export default (state = {}, action) => {
   switch (action.type) {
-    // for deleting artwork
-    case DELETE_PIECE:
+    // for index folders page
+    case FETCH_FOLDERS:
+      return action.payload;
+    // for deleting a folder
+    case DELETE_FOLDER:
       return _.omit(state, action.payload);
-    // for show and update artwork pages, fetches one piece
-    case FETCH_PIECE:
+    // update folder page and index artwork, fetches one folder
+    case FETCH_FOLDER:
       return { ...state, [action.payload.id]: action.payload };
     default:
       return state;

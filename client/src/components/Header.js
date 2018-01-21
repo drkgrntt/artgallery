@@ -13,7 +13,7 @@ class Header extends Component {
       default:
         return [
           <li key="1" className="hide-on-med-and-down" style={{ margin: '0 10px' }}>Admin View Enabled</li>,
-          <li key="2"><Link to="/artwork/add">Add Art</Link></li>
+          <li key="2"><Link to="/gallery/add">Add a Gallery</Link></li>
         ];
     }
   }
@@ -40,7 +40,7 @@ class Header extends Component {
     return (
       <nav>
         <div className="nav-wrapper container">
-          <Link to="/artwork" className="left brand-logo">Art Gallery</Link>
+          <Link to="/gallery" className="left brand-logo">Art Gallery</Link>
           <ul className="right">
             {this.renderAdminContent()}
             {this.renderContent()}

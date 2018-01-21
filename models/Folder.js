@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const artSchema = new Schema({
+const folderSchema = new Schema({
   image: String,
-  artist: String,
-  teacher: String,
-  level: String,
+  title: String,
   description: String,
   created: { type: Date, default: Date.now },
-  comments: [
+  artworks: [
     {
-      // './Comment.js'
+      // './Artwork.js'
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'comment'
+      ref: 'artwork'
     }
   ]
 },
@@ -20,4 +18,4 @@ const artSchema = new Schema({
   usePushEach: true
 });
 
-module.exports = mongoose.model('artwork', artSchema);
+module.exports = mongoose.model('folder', folderSchema);

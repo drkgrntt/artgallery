@@ -21,9 +21,9 @@ class AddComment extends Component {
   // HANDLE SUBMIT
   onSubmit(text) {
     const { createComment, history } = this.props;
-    const { id } = this.props.match.params;
+    const { id, artwork_id } = this.props.match.params;
 
-    createComment(id, text, history);
+    createComment(id, artwork_id, text, history);
   }
 
   // RENDER ADD COMMENT FORM COMPONENT

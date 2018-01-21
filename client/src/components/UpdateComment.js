@@ -7,9 +7,9 @@ import { updateComment, fetchComment } from '../actions';
 class UpdateComment extends Component {
   // FETCH SELECTED COMMENT
   componentDidMount() {
-    const { id, comment_id } = this.props.match.params;
+    const { id, artwork_id, comment_id } = this.props.match.params;
     
-    this.props.fetchComment(id, comment_id);
+    this.props.fetchComment(id, artwork_id, comment_id);
   }
   
   // RENDER TEXT INPUT FIELD
@@ -28,15 +28,15 @@ class UpdateComment extends Component {
   // HANDLE SUBMIT
   onSubmit(text) {
     const { updateComment, history } = this.props;
-    const { id, comment_id } = this.props.match.params;
+    const { id, artwork_id, comment_id } = this.props.match.params;
 
-    updateComment(id, comment_id, text, history);
+    updateComment(id, artwork_id, comment_id, text, history);
   }
 
   // RENDER COMMENT UPDATE FORM
   render() {
     const { handleSubmit } = this.props;
-    const { id } = this.props.match.params;
+    const { id, artwork_id } = this.props.match.params;
 
     return (
       <div className="card-panel">
@@ -54,7 +54,7 @@ class UpdateComment extends Component {
             Submit
           </button>
           <Link
-            to={`/artwork/show/${id}`}
+            to={`/gallery/${id}/artwork/show/${artwork_id}`}
             className="btn"
             style={{ margin: '13px' }}
           >
@@ -69,7 +69,6 @@ class UpdateComment extends Component {
 // TURN SELECTED COMMENT INTO A PROP
 const mapStateToProps = ({ comment }, ownProps) => {
   return {
-    comment: comment[ownProps.match.params._id],
     // set initial form value from selected comment
     initialValues: comment[ownProps.match.params._id]
   };

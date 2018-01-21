@@ -3,6 +3,7 @@ const cloudinary = require('cloudinary');
 const keys = require('../config/keys');
 const isLoggedIn = require('../middleware/isLoggedIn');
 const isAdmin = require('../middleware/isAdmin');
+const Folder = require('../models/Folder');
 const Artwork = require('../models/Artwork');
 
 // MULTER CONFIG
@@ -21,22 +22,22 @@ const upload = multer({ storage: storage, fileFilter: imageFilter });
 
 // CLOUDINARY CONFIG
 cloudinary.config({
-  cloud_name: 'drkgrntt',
+  cloud_name: keys.cloudName,
   api_key: keys.cloudinaryKey,
   api_secret: keys.cloudinarySecret
 });
 
 module.exports = (app) => {
   // INDEX ARTWORK ROUTE
-  app.get('/api/artwork', async (req, res) => {
+  app.get('/api/folder/:id/artwork', async (req, res) => {
     const artwork = await Artwork.find().sort({ created: -1 });
 
     res.send(artwork);
   });
   
   // SHOW ARTWORK ROUTE
-  app.get('/api/artwork/:id', async (req, res) => {
-    const artwork = await Artwork.findById(req.params.id)
+  app.get('/api/folder/:id/artwork/:artwork_id', async (req, res) => {
+    const artwork = await Artwork.findById(req.params.artwork_id)
       // INCLUDE INDIVIDUAL COMMENTS
       .populate('comments');
 
@@ -44,9 +45,9 @@ module.exports = (app) => {
   });
 
   // CREATE ARTWORK ROUTE
-  app.post('/api/artwork', isLoggedIn, isAdmin, upload.single('image'), (req, res) => {
+  app.post('/api/folder/:id/artwork', isLoggedIn, isAdmin, upload.single('image'), (req, res) => {
     // upload image file to cloudinary
-    cloudinary.uploader.upload(req.file.path, (result) => {
+    cloudinary.uploader.upload(req.file.path, async (result) => {
       // store cloudinary url
       req.body.image = result.secure_url;
 
@@ -58,22 +59,25 @@ module.exports = (app) => {
         description,
         image
       });
+      const folder = await Folder.findById(req.params.id);
 
-      artwork.save();
+      await artwork.save();
+      await folder.artworks.push(artwork);
+      folder.save();
       res.send(artwork);
     });
   });
   
   // UPDATE ARTWORK ROUTE
-  app.put('/api/artwork/:id', isLoggedIn, isAdmin, async (req, res) => {
-    const turnTheArtIntoAShrub = await Artwork.findByIdAndUpdate(req.params.id, req.body);
+  app.put('/api/folder/:id/artwork/:artwork_id', isLoggedIn, isAdmin, async (req, res) => {
+    const turnTheArtIntoAShrub = await Artwork.findByIdAndUpdate(req.params.artwork_id, req.body);
     
     res.send(turnTheArtIntoAShrub);
   });
 
   // DELETE ARTWORK ROUTE
   app.delete('/api/artwork/:id', isLoggedIn, isAdmin, async (req, res) => {
-    const burnTheArt = await Artwork.findByIdAndRemove(req.params.id);
+    const burnTheArt = await Artwork.findByIdAndRemove(req.params.artwork_id);
 
     res.send(burnTheArt);
   });

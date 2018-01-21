@@ -8,32 +8,32 @@ import { fetchPiece, deletePiece, deleteComment } from '../actions';
 class ShowArtwork extends Component {
   // FETCH INDIVIDUAL PIECE OF ART TO EXPAND
   componentDidMount() {
-    const { id } = this.props.match.params;
+    const { id, artwork_id } = this.props.match.params;
     
-    this.props.fetchPiece(id);
+    this.props.fetchPiece(id, artwork_id);
   }
 
   // HANDLE DELETE PIECE (AVAILABLE TO ADMIN ONLY)
   onDeleteClick() {
-    const { id } = this.props.match.params;
+    const { id, artwork_id } = this.props.match.params;
     const { history, deletePiece } = this.props;
 
-    deletePiece(id, history);
+    deletePiece(id, artwork_id, history);
   }
 
   // HANDLE DELETE COMMENT (AVAILABLE TO COMMENT OWNER AND ADMIN)
   onDeleteCommentClick(comment) {
-    const pieceId = this.props.match.params.id;
-    const commentId = comment._id;
+    const { id, artwork_id } = this.props.match.params;
+    const comment_id = comment._id;
     const { history, deleteComment, } = this.props;
 
-    deleteComment(pieceId, commentId, history);
+    deleteComment(id, artwork_id, comment_id, history);
   }
 
   // MAKE DELETE AND EDIT COMMENT BUTTONS VISIBLE ONLY TO COMMENT OWNER AND ADMIN
   renderCommentOwnership(comment) {
-    const pieceId = this.props.match.params.id;
-    const commentId = comment._id;
+    const { id, artwork_id } = this.props.match.params;
+    const comment_id = comment._id;
     const { auth } = this.props;
 
     if (auth.name === comment.author.name || auth.isAdmin) {
@@ -47,7 +47,7 @@ class ShowArtwork extends Component {
             Delete Comment
           </a>
           <Link
-            to={`/artwork/show/${pieceId}/update/${commentId}`}
+            to={`/gallery/${id}/artwork/show/${artwork_id}/update/${comment_id}`}
             className="orange-text"
             style={{ cursor: 'pointer', margin: '15px' }}
           >
@@ -64,7 +64,7 @@ class ShowArtwork extends Component {
   renderComments() {
     const { comments } = this.props.piece;
 
-    if (!comments) {
+    if (comments == false) {
       return (
         <span>Be the first to leave a comment!</span>
       );
@@ -109,7 +109,7 @@ class ShowArtwork extends Component {
       case false:
         return;
       default:
-        const { id } = this.props.match.params;
+        const { id, artwork_id } = this.props.match.params;
     
         return (
           <div style={{ display: "inline" }}>
@@ -121,7 +121,7 @@ class ShowArtwork extends Component {
               Delete Piece
             </a>
             <Link
-              to={`/artwork/update/${id}`}
+              to={`/gallery/${id}/artwork/update/${artwork_id}`}
               className="right"
             >
               Edit Piece
@@ -134,6 +134,7 @@ class ShowArtwork extends Component {
   // RENDER SHOW PAGE FOR SELECTED PIECE OF ART
   render() {
     const { piece } = this.props;
+    const { id } = this.props.match.params;
 
     if (!piece) {
       return (
@@ -161,7 +162,7 @@ class ShowArtwork extends Component {
               <p>{piece.description}</p>
             </div>
             <div className="card-action">
-              <Link to="/artwork">Back to the Gallery</Link>
+              <Link to={`/gallery/${id}/artwork`}>Back to the Gallery</Link>
               {this.renderAdminContent()}
             </div>
           </div>

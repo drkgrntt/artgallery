@@ -11,6 +11,9 @@ import IndexArtwork from './IndexArtwork';
 import Landing from './Landing';
 import UpdateArtwork from './UpdateArtwork';
 import UpdateComment from './UpdateComment';
+import IndexFolders from './IndexFolders';
+import AddFolder from './AddFolder';
+import UpdateFolder from './UpdateFolder';
 
 class App extends Component {
   // FETCH CURRENT USER
@@ -29,11 +32,14 @@ class App extends Component {
             <div className="container">
               <Route exact path="/" component={Landing} />
               <Route exact path="/admin" component={Admin} />
-              <Route exact path="/artwork" component={IndexArtwork} />
-              <Route exact path="/artwork/show/:id" component={ShowArtwork} />
-              <Route exact path="/artwork/update/:id" component={UpdateArtwork} />
-              <Route exact path="/artwork/show/:id/update/:comment_id" component={UpdateComment} />
-              <Route exact path="/artwork/add" component={AddArtwork} />
+              <Route exact path="/gallery" component={IndexFolders} />
+              <Route exact path="/gallery/add" component={AddFolder} />
+              <Route exact path="/gallery/update/:id" component={UpdateFolder} />
+              <Route exact path="/gallery/:id/artwork" component={IndexArtwork} />
+              <Route exact path="/gallery/:id/artwork/show/:artwork_id" component={ShowArtwork} />
+              <Route exact path="/gallery/:id/artwork/update/:artwork_id" component={UpdateArtwork} />
+              <Route exact path="/gallery/:id/artwork/show/:artwork_id/update/:comment_id" component={UpdateComment} />
+              <Route exact path="/gallery/:id/artwork/add" component={AddArtwork} />
             </div>
           </div>
         </BrowserRouter>

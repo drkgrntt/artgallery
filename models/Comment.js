@@ -12,6 +12,9 @@ const commentSchema = new Schema({
     name: String
   },
   created: { type: Date, default: Date.now }
+},
+{
+  usePushEach: true
 });
 
 module.exports = mongoose.model('comment', commentSchema);

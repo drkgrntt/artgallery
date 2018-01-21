@@ -8,5 +8,6 @@ module.exports = {
   cloudinaryKey: process.env.CLOUDINARY_KEY,
   cloudinarySecret: process.env.CLOUDINARY_SECRET,
   cloudinaryEnvVar: process.env.CLOUDINARY_ENV_VAR,
+  cloudName: process.env.CLOUD_NAME
   port: process.env.PORT
 };
