@@ -67,7 +67,10 @@ class ShowArtwork extends Component {
 
     if (comments == false) {
       return (
-        <span>Be the first to leave a comment!</span>
+        <div>
+          <span>Be the first to leave a comment!</span>
+          <hr />
+        </div>
       );
     }
 
@@ -91,44 +94,36 @@ class ShowArtwork extends Component {
 
   // RENDER LOGIN LINK OR COMMENT FORM
   renderLoggedInContent() {
-    switch (this.props.auth) {
-      case null:
-        return;
-      case false:
-        return <a href="/auth/google">Log in to comment!</a>;
-      default:
-        return <AddComment />;
+    if (this.props.auth == false) {
+      return <a href="/auth/google">Log in to comment!</a>;
     }
+
+    return <AddComment />;
   }
 
   // RENDER EDIT AND DELETE BUTTONS FOR THE ARTWORK PIECE
   // VISIBLE ONLY TO ADMIN
   renderAdminContent() {
-    switch (this.props.auth && this.props.auth.isAdmin) {
-      case null:
-        return;
-      case false:
-        return;
-      default:
-        const { id, artwork_id } = this.props.match.params;
-    
-        return (
-          <div style={{ display: "inline" }}>
-            <a
-              className="right red-text"
-              style={{ cursor: 'pointer' }}
-              onClick={this.onDeleteClick.bind(this)}
-            >
-              Delete Piece
-            </a>
-            <Link
-              to={`/gallery/${id}/artwork/update/${artwork_id}`}
-              className="right"
-            >
-              Edit Piece
-            </Link>
-          </div>
-        );
+    if (this.props.auth && this.props.auth.isAdmin) {
+      const { id, artwork_id } = this.props.match.params;
+  
+      return (
+        <div style={{ display: "inline" }}>
+          <a
+            className="right red-text"
+            style={{ cursor: 'pointer' }}
+            onClick={this.onDeleteClick.bind(this)}
+          >
+            Delete Piece
+          </a>
+          <Link
+            to={`/gallery/${id}/artwork/update/${artwork_id}`}
+            className="right"
+          >
+            Edit Piece
+          </Link>
+        </div>
+      );
     }
   }
 

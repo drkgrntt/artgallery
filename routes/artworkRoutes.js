@@ -28,13 +28,6 @@ cloudinary.config({
 });
 
 module.exports = (app) => {
-  // INDEX ARTWORK ROUTE
-  app.get('/api/folder/:id/artwork', async (req, res) => {
-    const artwork = await Artwork.find().sort({ created: -1 });
-
-    res.send(artwork);
-  });
-  
   // SHOW ARTWORK ROUTE
   app.get('/api/folder/:id/artwork/:artwork_id', async (req, res) => {
     const artwork = await Artwork.findById(req.params.artwork_id)
