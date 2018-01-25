@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateFolder, fetchFolder } from '../actions';
+import TextEditor from './TextEditor';
 
 class UpdateFolder extends Component {
   // FETCH SELECTED ARTWORK PIECE TO EDIT
@@ -56,21 +57,23 @@ class UpdateFolder extends Component {
           <Field
             label="Description"
             name="description"
-            component={this.renderField}
+            component={TextEditor}
           />
-          <button 
-            type="submit" 
-            className="waves-light waves-effect btn"
-          >
-            Submit
-          </button>
-          <Link 
-            to={`/gallery/${id}/artwork`}
-            style={{ margin: '0 5px' }} 
-            className="waves-light waves-effect btn"
-          >
-            Cancel
-          </Link>
+          <div style={{ marginTop: '20px' }}>
+            <button 
+              type="submit" 
+              className="waves-light waves-effect btn"
+            >
+              Submit
+            </button>
+            <Link 
+              to={`/gallery/${id}/artwork`}
+              style={{ margin: '0 5px' }} 
+              className="waves-light waves-effect btn"
+            >
+              Cancel
+            </Link>
+          </div>
         </form>
       </div>
     );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import renderHTML from 'react-render-html';
 import { fetchFolder, deleteFolder } from '../actions';
 
 class IndexArtwork extends Component {
@@ -94,10 +95,10 @@ class IndexArtwork extends Component {
 
     return (
       <div className="row">
-        <div className="card blue-grey darken-1">
+        <div className="card blue-grey darken-1" style={{ margin: '10px' }}>
           <div className="card-content white-text">
             <span className="card-title">{folder.title}</span>
-            <p>{folder.description}</p>
+            <p>{renderHTML(folder.description)}</p>
           </div>
           <div className="card-action">
             <Link to="/gallery">Back to Galleries</Link>

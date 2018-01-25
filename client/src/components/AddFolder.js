@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createFolder } from '../actions';
 import FileInput from './FileInput';
+import TextEditor from './TextEditor';
 
 class AddFolder extends Component {
   // RENDER TEXT INPUT FIELD
@@ -47,21 +48,23 @@ class AddFolder extends Component {
           <Field
             label="Description"
             name="description"
-            component={this.renderField}
+            component={TextEditor}
           />
-          <button 
-            type="submit" 
-            className="waves-light waves-effect btn"
-          >
-            Submit
-          </button>
-          <Link 
-            to='/gallery'
-            style={{ margin: '0 5px' }} 
-            className="waves-light waves-effect btn"
-          >
-            Cancel
-          </Link>
+          <div style={{ marginTop: '20px' }}>
+            <button 
+              type="submit" 
+              className="waves-light waves-effect btn"
+            >
+              Submit
+            </button>
+            <Link 
+              to='/gallery'
+              style={{ margin: '0 5px' }} 
+              className="waves-light waves-effect btn"
+            >
+              Cancel
+            </Link>
+          </div>
         </form>
       </div>
     );

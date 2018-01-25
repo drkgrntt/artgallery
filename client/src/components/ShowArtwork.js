@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
+import renderHTML from 'react-render-html';
 import AddComment from './AddComment';
 import { fetchPiece, deletePiece, deleteComment } from '../actions';
 
@@ -159,7 +160,7 @@ class ShowArtwork extends Component {
               </span>
             </div>
             <div className="card-content">
-              <p>{piece.description}</p>
+              <p>{renderHTML(piece.description)}</p>
             </div>
             <div className="card-action">
               <Link to={`/gallery/${id}/artwork`}>Back to the Gallery</Link>

@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createArtwork } from '../actions';
 import FileInput from './FileInput';
+import TextEditor from './TextEditor';
 
 class AddArtwork extends Component {
   // RENDER TEXT INPUT FIELD
@@ -59,21 +60,23 @@ class AddArtwork extends Component {
           <Field
             label="Description"
             name="description"
-            component={this.renderField}
+            component={TextEditor}
           />
-          <button 
-            type="submit" 
-            className="waves-light waves-effect btn"
-          >
-            Submit
-          </button>
-          <Link 
-            to={`/gallery/${id}/artwork`}
-            style={{ margin: '0 5px' }} 
-            className="waves-light waves-effect btn"
-          >
-            Cancel
-          </Link>
+          <div style={{ marginTop: '20px' }}>
+            <button 
+              type="submit" 
+              className="waves-light waves-effect btn"
+            >
+              Submit
+            </button>
+            <Link 
+              to={`/gallery/${id}/artwork`}
+              style={{ margin: '0 5px' }} 
+              className="waves-light waves-effect btn"
+            >
+              Cancel
+            </Link>
+          </div>
         </form>
       </div>
     );
