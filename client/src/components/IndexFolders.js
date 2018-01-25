@@ -42,6 +42,7 @@ class IndexFolders extends Component {
   render() {
     return (
       <div className="row">
+        <h3 style={{ marginLeft: '10px' }}>Project Galleries</h3>
         <ul>
           {this.renderFolderCard()}
         </ul>

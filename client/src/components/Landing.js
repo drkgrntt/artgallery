@@ -10,7 +10,7 @@ class Landing extends Component {
         <div className="col s12 m6" style={{ textAlign: 'center' }}>
           <div className="card blue-grey darken-1">
             <div className="card-content white-text">
-              <span className="card-title">Welcome to Mrs. Garnett's Art Gallery!</span>
+              <span className="card-title">Welcome to the Luff Art Club Gallery!</span>
               <p>
                 This is where all of the art created in 
                 the Luff Elementary Art Club is showcased. 
