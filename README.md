@@ -39,7 +39,7 @@ module.exports = {
 -`cloudinaryKey` ,  `cloudinarySecret`, `cloudinaryEnvVar`, and `cloudName` are keys found within your Cloudinary account.
 
 ### Fire it Up
-Once everything is configured for development, you can run your application by entering `node app.js` in the command prompt. `Server is Running!` should print into your command prompt, and then you can view it on port 8080 (or whichever port you set it to).
+Once everything is configured for development, you can run your application by entering `npm run dev` in the command prompt. 'dev' is a script to run the server and client at the same time. Once you run this command, a new tab should open up in your browser with your project.
 
 ## Production
 ### Prerequisites
