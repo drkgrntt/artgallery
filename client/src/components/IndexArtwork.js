@@ -63,9 +63,10 @@ class IndexArtwork extends Component {
         <li key={art._id}>
           <div className="col s12 m6 l3">
             <div className="card hoverable">
-              <div className="card-image">
-                <img src={art.image} />
-              </div>
+              <div 
+                className="card-image art-card"
+                style={{ backgroundImage: `url(${art.image}` }}
+              ></div>
               <div className="card-content">
                 <p>{art.artist}</p>
                 <p>Grade: {art.level}</p>

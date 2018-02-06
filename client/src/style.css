@@ -6,3 +6,9 @@ body {
     background-size: cover;
     background-attachment: fixed;
 }
+
+.art-card {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+}

@@ -22,9 +22,10 @@ class IndexFolders extends Component {
         <li key={folder._id}>
           <div className="col s12 m6 l3">
             <div className="card hoverable">
-              <div className="card-image">
-                <img src={folder.image} />
-              </div>
+              <div 
+                className="card-image art-card"
+                style={{ backgroundImage: `url(${folder.image}` }}
+              ></div>
               <div className="card-content">
                 <p>{folder.title}</p>
               </div>
