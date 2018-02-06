@@ -1,6 +1,6 @@
 # Art Gallery App
 
-[Art Gallery](https://dry-badlands-96280.herokuapp.com/) is essentially a photo displayer. It was created to show off art made by students in an art club at an elementary school. It allows users to go to the gallery, login with google for commenting, and expand different galleries and individual pieces of art. The operator has admin access to be able to upload, post, edit, and delete parent-level galleries and child-level pieces of artwork and their info. User features include being able to comment on pictures and edit or delete those comments. The current pictures are samples to display what the gallery looks like, as the art club has not started yet.
+[Art Gallery](https://luffartclub.herokuapp.com/) is essentially a photo displayer. It was created to show off art made by students in an art club at an elementary school. It allows users to go to the gallery, login with google for commenting, and expand different galleries and individual pieces of art. The operator has admin access to be able to upload, post, edit, and delete parent-level galleries and child-level pieces of artwork and their info. User features include being able to comment on pictures and edit or delete those comments. The current pictures are samples to display what the gallery looks like, as the art club has not started yet.
 
 ## Development
 ### Prerequisites
