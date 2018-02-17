@@ -14,6 +14,7 @@ import UpdateComment from './UpdateComment';
 import IndexFolders from './IndexFolders';
 import AddFolder from './AddFolder';
 import UpdateFolder from './UpdateFolder';
+import DerekGarnettPlug from './DerekGarnettPlug';
 
 class App extends Component {
   // FETCH CURRENT USER
@@ -41,6 +42,7 @@ class App extends Component {
               <Route exact path="/gallery/:id/artwork/show/:artwork_id/update/:comment_id" component={UpdateComment} />
               <Route exact path="/gallery/:id/artwork/add" component={AddArtwork} />
             </div>
+            <DerekGarnettPlug />
           </div>
         </BrowserRouter>
       </div>

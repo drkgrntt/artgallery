@@ -12,3 +12,11 @@ body {
   background-size: cover;
   background-position: center;
 }
+
+.derek {
+  height: 40px;
+  position: fixed;
+  margin: 0 auto;
+  bottom: 0%;
+  width: 100%;
+}
