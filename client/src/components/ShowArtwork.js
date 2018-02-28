@@ -155,7 +155,7 @@ class ShowArtwork extends Component {
               </span>
             </div>
             <div className="card-content">
-              <p>{renderHTML(piece.description)}</p>
+              <div>{renderHTML(piece.description)}</div>
             </div>
             <div className="card-action">
               <Link to={`/gallery/${id}/artwork`}>Back to the Gallery</Link>

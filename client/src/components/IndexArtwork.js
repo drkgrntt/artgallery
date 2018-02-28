@@ -99,7 +99,7 @@ class IndexArtwork extends Component {
         <div className="card blue-grey darken-1" style={{ margin: '10px' }}>
           <div className="card-content white-text">
             <span className="card-title">{folder.title}</span>
-            <p>{renderHTML(folder.description)}</p>
+            <div>{renderHTML(folder.description)}</div>
           </div>
           <div className="card-action">
             <Link to="/gallery">Back to Galleries</Link>

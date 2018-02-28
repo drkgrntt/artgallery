@@ -40,7 +40,7 @@ module.exports = (app) => {
   // CREATE ARTWORK ROUTE
   app.post('/api/folder/:id/artwork', isLoggedIn, isAdmin, upload.single('image'), (req, res) => {
     // upload image file to cloudinary
-    cloudinary.uploader.upload(req.file.path, async (result) => {
+    cloudinary.v2.uploader.upload(req.file.path, { angle: 0 }, async (error, result) => {
       // store cloudinary url
       req.body.image = result.secure_url;
 
@@ -69,7 +69,7 @@ module.exports = (app) => {
   });
 
   // DELETE ARTWORK ROUTE
-  app.delete('/api/artwork/:id', isLoggedIn, isAdmin, async (req, res) => {
+  app.delete('/api/folder/:id/artwork/:artwork_id', isLoggedIn, isAdmin, async (req, res) => {
     const burnTheArt = await Artwork.findByIdAndRemove(req.params.artwork_id);
 
     res.send(burnTheArt);
