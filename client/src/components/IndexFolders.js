@@ -26,7 +26,7 @@ class IndexFolders extends Component {
                 className="card-image art-card"
                 style={{ backgroundImage: `url(${folder.image}` }}
               ></div>
-              <div className="card-content">
+              <div className="card-content gallery">
                 <p>{folder.title}</p>
               </div>
               <div className="card-action">

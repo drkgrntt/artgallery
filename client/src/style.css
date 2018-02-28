@@ -11,6 +11,10 @@ body {
   height: 150px;
 }
 
+.card-content.gallery {
+  height: 80px;
+}
+
 .art-card {
   height: 200px;
   background-size: cover;
