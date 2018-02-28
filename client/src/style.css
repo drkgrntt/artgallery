@@ -7,8 +7,12 @@ body {
     background-attachment: fixed;
 }
 
+.card-content.artwork {
+  height: 150px;
+}
+
 .art-card {
-  height: 180px;
+  height: 200px;
   background-size: cover;
   background-position: center;
 }

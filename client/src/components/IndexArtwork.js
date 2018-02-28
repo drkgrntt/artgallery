@@ -66,8 +66,8 @@ class IndexArtwork extends Component {
               <div 
                 className="card-image art-card"
                 style={{ backgroundImage: `url(${art.image}` }}
-              ></div>
-              <div className="card-content">
+              />
+              <div className="card-content artwork">
                 <p>{art.artist}</p>
                 <p>Grade: {art.level}</p>
                 <p>Teacher: {art.teacher}</p>
