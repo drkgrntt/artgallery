@@ -49,7 +49,7 @@ module.exports = (app) => {
         artist,
         teacher,
         level,
-        description,
+        description: description ? description : '',
         image
       });
       const folder = await Folder.findById(req.params.id);

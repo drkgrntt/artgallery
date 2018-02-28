@@ -46,14 +46,14 @@ module.exports = (app) => {
   // CREATE FOLDER ROUTE
   app.post('/api/folder', isLoggedIn, isAdmin, upload.single('image'), (req, res) => {
     // upload image file to cloudinary
-    cloudinary.uploader.upload(req.file.path, (result) => {
+    cloudinary.v2.uploader.upload(req.file.path, { angle: 0 }, (error, result) => {
       // store cloudinary url
       req.body.image = result.secure_url;
 
       const { image, title, description } = req.body;
       const folder = new Folder({
         title,
-        description,
+        description: description ? description : '',
         image
       });
 
