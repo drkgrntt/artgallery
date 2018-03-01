@@ -18,8 +18,11 @@ class ShowArtwork extends Component {
   onDeleteClick() {
     const { id, artwork_id } = this.props.match.params;
     const { history, deletePiece } = this.props;
+    const confirm = window.confirm("Are you sure?");
 
-    deletePiece(id, artwork_id, history);
+    if (confirm) {
+      deletePiece(id, artwork_id, history);      
+    }
   }
 
   // HANDLE DELETE COMMENT (AVAILABLE TO COMMENT OWNER AND ADMIN)
@@ -27,8 +30,11 @@ class ShowArtwork extends Component {
     const { id, artwork_id } = this.props.match.params;
     const comment_id = comment._id;
     const { history, deleteComment, } = this.props;
+    const confirm = window.confirm("Are you sure?");
 
-    deleteComment(id, artwork_id, comment_id, history);
+    if (confirm) {
+      deleteComment(id, artwork_id, comment_id, history);      
+    }
   }
 
   // MAKE DELETE AND EDIT COMMENT BUTTONS VISIBLE ONLY TO COMMENT OWNER AND ADMIN

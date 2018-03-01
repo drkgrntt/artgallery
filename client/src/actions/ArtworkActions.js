@@ -35,7 +35,7 @@ export const deletePiece = (id, artwork_id, history) => async (dispatch) => {
   const res = await axios.delete(`/api/folder/${id}/artwork/${artwork_id}`);
 
   history.push(`/gallery/${id}/artwork`);
-  dispatch({ type: DELETE_PIECE, payload: res.id });
+  dispatch({ type: DELETE_PIECE, payload: res.id });    
 };
 
 // UPDATE A PIECE OF ARTWORK AND REDIRECT

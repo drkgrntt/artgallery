@@ -17,8 +17,11 @@ class IndexArtwork extends Component {
   onDeleteClick() {
     const { id } = this.props.match.params;
     const { history, deleteFolder } = this.props;
+    const confirm = window.confirm('Are you sure?');
 
-    deleteFolder(id, history);
+    if (confirm) {
+      deleteFolder(id, history);
+    }
   }
 
   // SHOW ADD/DELETE/UPDATE ARTWORK LINKS

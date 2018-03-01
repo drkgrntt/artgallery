@@ -43,7 +43,7 @@ export const deleteFolder = (id, history) => async (dispatch) => {
   const res = await axios.delete(`/api/folder/${id}`);
 
   history.push(`/gallery`);
-  dispatch({ type: DELETE_FOLDER, payload: res.id });
+  dispatch({ type: DELETE_FOLDER, payload: res.id });    
 };
 
 // UPDATE A PARTICULAR FOLDER
